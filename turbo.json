@@ -1,0 +1,30 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["generate", "^build"]
+    },
+    "storybook": { "cache": false, "persistent": true },
+    "lint": {},
+    "generate": {
+      "inputs": ["src/graphql/**"],
+      "outputs": ["src/gql/**"]
+    },
+    "build": {
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "dependsOn": ["generate", "^build"]
+    },
+    "export": {},
+    "dev-share": {
+      "persistent": true
+    },
+    "build-share": {
+      "outputs": [".next/**"]
+    },
+    "build-storybook": {
+      "outputs": ["storybook-static/**"]
+    }
+  }
+}
